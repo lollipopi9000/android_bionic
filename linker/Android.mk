@@ -49,6 +49,7 @@ LOCAL_CONLYFLAGS += \
 
 LOCAL_CPPFLAGS += \
     -Wold-style-cast \
+    -std=gnu++11
 
 ifeq ($(TARGET_IS_64_BIT),true)
 LOCAL_CPPFLAGS += -DTARGET_IS_64_BIT
