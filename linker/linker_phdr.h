@@ -54,6 +54,9 @@ class ElfReader {
   const ElfW(Dyn)* dynamic() const { return dynamic_; }
   const char* get_string(ElfW(Word) index) const;
   bool is_mapped_by_caller() const { return mapped_by_caller_; }
+#ifdef ENABLE_PRELINK_SUPPORT
+  ElfW(Addr) required_base() { return required_base_; }
+#endif
 
  private:
   bool ReadElfHeader();
@@ -97,7 +100,11 @@ class ElfReader {
   size_t load_size_;
   // Load bias.
   ElfW(Addr) load_bias_;
-
+#ifdef ENABLE_PRELINK_SUPPORT
+  // For prelinked libraries, mandatory load address of the first
+  // loadable segment. 0 otherwise.
+  ElfW(Addr) required_base_;
+#endif
   // Loaded phdr.
   const ElfW(Phdr)* loaded_phdr_;
 
