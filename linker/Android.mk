@@ -63,6 +63,10 @@ ifeq ($(TARGET_ENABLE_NON_PIE_SUPPORT),true)
     LOCAL_CFLAGS += -DENABLE_NON_PIE_SUPPORT
 endif
 
+ifneq ($(filter msm7x27a msm7x30 msm8660 msm8960,$(TARGET_BOARD_PLATFORM)),)
+LOCAL_CPPFLAGS += -DUSE_LEGACY_BLOBS
+endif
+
 # We need to access Bionic private headers in the linker.
 LOCAL_CFLAGS += -I$(LOCAL_PATH)/../libc/
 
